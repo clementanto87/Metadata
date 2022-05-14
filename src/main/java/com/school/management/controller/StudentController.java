@@ -1,7 +1,6 @@
 package com.school.management.controller;
 
 import com.school.management.config.ApplicationConstant;
-import com.school.management.dto.CourseDto;
 import com.school.management.dto.StudentDto;
 import com.school.management.entity.Student;
 import com.school.management.service.StudentService;

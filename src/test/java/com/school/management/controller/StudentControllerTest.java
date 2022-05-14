@@ -1,10 +1,9 @@
 package com.school.management.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.school.management.dto.CourseDto;
-import com.school.management.entity.Course;
-import com.school.management.repository.CourseRepository;
-import com.school.management.service.CourseService;
+import com.school.management.dto.StudentDto;
+import com.school.management.entity.Student;
+import com.school.management.service.StudentService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -30,61 +29,57 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestPropertySource(locations="classpath:test.properties")
-@DisplayName("Course Controller Unit Test Case")
+@DisplayName("Student Controller Unit Test Case")
 @AutoConfigureMockMvc
-public class CourseControllerTest {
+public class StudentControllerTest {
 
     @Autowired
     MockMvc mockMvc;
 
-    @MockBean
-    CourseService courseService;
-
-    @Autowired
-    CourseRepository courseRepository;
-
     @Autowired
     ObjectMapper objectMapper;
 
+    @MockBean
+    StudentService studentService;
+
     @Test
-    public void getCoursesTest() throws Exception {
-        List<Course> courseList = new ArrayList<>();
-        Page<Course> pagedResponse = new PageImpl<>(courseList);
-        Mockito.when(courseService.getCourses(Pageable.ofSize(10))).thenReturn(pagedResponse);
+    public void getStudentsTest() throws Exception {
+        List<Student> arrayList = new ArrayList<>();
+        Page<Student> pagedResponse = new PageImpl<>(arrayList);
+        Mockito.when(studentService.getStudents(Pageable.ofSize(10))).thenReturn(pagedResponse);
         mockMvc.perform( MockMvcRequestBuilders
-                        .get("/courses")
+                        .get("/students")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void saveCourseTest() throws Exception {
-        Course course = new Course();
-        course.setCourseName("test name");
-        Mockito.when(courseService.saveCourse(new CourseDto(course))).thenReturn(new CourseDto(course));
-        mockMvc.perform(MockMvcRequestBuilders.post("/courses")
+    public void saveStudentTest() throws Exception {
+        StudentDto studentDto = new StudentDto();
+        studentDto.setAge(21);
+        Mockito.when(studentService.saveStudent(studentDto)).thenReturn(studentDto);
+        mockMvc.perform(MockMvcRequestBuilders.post("/students")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsBytes(new CourseDto(course))))
+                        .content(objectMapper.writeValueAsBytes(studentDto)))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void findCoursesByStudentTest() throws Exception {
-        List<CourseDto> courseDtos = new ArrayList<>();
-        Mockito.when(courseService.findCoursesByStudent(1)).thenReturn(courseDtos);
+    public void findStudentsByCourseTest() throws Exception {
+        List<StudentDto> studentDtos = new ArrayList<>();
+        Mockito.when(studentService.findStudentsByCourse(1)).thenReturn(studentDtos);
         mockMvc.perform( MockMvcRequestBuilders
-                        .get("/courses/students/1")
+                        .get("/students/courses/1")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
-
     @Test
-    public void emptyCoursesTest() throws Exception {
-        List<CourseDto> courseDtos = new ArrayList<>();
-        Mockito.when(courseService.emptyCourses()).thenReturn(courseDtos);
+    public void emptyStudentsTest() throws Exception {
+        List<StudentDto> studentDtos = new ArrayList<>();
+        Mockito.when(studentService.emptyStudents()).thenReturn(studentDtos);
         mockMvc.perform( MockMvcRequestBuilders
-                        .get("/courses/empty")
+                        .get("/students/empty")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
