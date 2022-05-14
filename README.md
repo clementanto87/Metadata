@@ -1,4 +1,4 @@
-# WorkMotion
+# Metadata
 * Swagger Doc URL (Open API):
     * http://localhost:9072/v3/api-docs/
 
