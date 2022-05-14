@@ -6,7 +6,7 @@
     * Junit and Mockito framework is used.
 
 * Tech Stack
-    * JAVA11 and Spring Boot 2.6.6
+    * JAVA11 and Spring Boot 2.6.4
     * Mysql Database
     * Tomcat server
 
