@@ -1,0 +1,10 @@
+rbac:
+  details:
+    - permission: ADMIN
+      urlmapping:
+        '[/api/v1/courses*]': GET, POST, PUT, DELETE, PATCH
+        '[/api/v1/students*]': GET, POST, PUT, DELETE, PATCH
+        '[/api/v1/enroll*]': GET, POST, PUT, DELETE, PATCH
+        '[/api/v1/employees/notified/system]': GET
+
+
