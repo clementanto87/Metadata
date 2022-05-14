@@ -16,5 +16,5 @@ services:
     environment:
       MYSQL_DATABASE: schooldb
       MYSQL_USER: root
-      MYSQL_PASSWORD: nE5kMc7JCGNqwDQM
-      MYSQL_ROOT_PASSWORD: nE5kMc7JCGNqwDQN
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
